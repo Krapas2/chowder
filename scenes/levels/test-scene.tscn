@@ -1,0 +1,522 @@
+[gd_scene load_steps=16 format=3 uid="uid://cqa6oxoablu5b"]
+
+[ext_resource type="Script" uid="uid://ka71n46wrovr" path="res://scripts/spin.gd" id="2_1gmwy"]
+[ext_resource type="Script" uid="uid://x3b2c1hyotyg" path="res://scripts/temperature/temp-shader-data.gd" id="2_81352"]
+[ext_resource type="Material" uid="uid://bxov54cym1qro" path="res://materials/temperature-palette.tres" id="2_q7s53"]
+[ext_resource type="PackedScene" uid="uid://bpdtmrois8y6r" path="res://prefabs/temp_collection.tscn" id="4_81352"]
+[ext_resource type="Script" uid="uid://c6xvddmp5quem" path="res://scripts/temperature/temp-node.gd" id="5_81352"]
+[ext_resource type="Script" uid="uid://8vrxtvuyej6r" path="res://scripts/temperature/temp-manager.gd" id="6_1gmwy"]
+[ext_resource type="Script" uid="uid://c68mmqiwkqp5e" path="res://scripts/temperature/temp-collection.gd" id="6_wh0gb"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_81352"]
+inner_radius = 0.2
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1gmwy"]
+height = 0.8
+radius = 1.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_pyd17"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vax5a"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wh0gb"]
+size = Vector3(12, 4, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pyd17"]
+size = Vector3(12, 4, 1)
+
+[sub_resource type="Environment" id="Environment_oktae"]
+background_mode = 2
+ambient_light_source = 1
+reflected_light_source = 1
+
+[sub_resource type="Environment" id="Environment_4n1no"]
+background_mode = 2
+ambient_light_source = 1
+
+[node name="Scene" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = ExtResource("2_q7s53")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HeatDonut0" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1)
+gravity_scale = 0.0
+script = ExtResource("2_1gmwy")
+rotation_amount = Vector3(0, 0, 0)
+
+[node name="Model" type="MeshInstance3D" parent="HeatDonut0"]
+mesh = SubResource("TorusMesh_81352")
+skeleton = NodePath("")
+
+[node name="TempShaderData" type="Node" parent="HeatDonut0/Model" node_paths=PackedStringArray("temp_nodes")]
+script = ExtResource("2_81352")
+temp_nodes = [NodePath("../../CollisionShape3D/TempCollection/TempNode0"), NodePath("../../CollisionShape3D/TempCollection/TempNode1"), NodePath("../../CollisionShape3D/TempCollection/TempNode2"), NodePath("../../CollisionShape3D/TempCollection/TempNode3"), NodePath("../../CollisionShape3D/TempCollection/TempNode5"), NodePath("../../CollisionShape3D/TempCollection/TempNode6"), NodePath("../../CollisionShape3D/TempCollection/TempNode7"), NodePath("../../CollisionShape3D/TempCollection/TempNode8")]
+temp_mult = 0.25
+opacity = 0.95
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeatDonut0"]
+shape = SubResource("CylinderShape3D_1gmwy")
+
+[node name="TempCollection" parent="HeatDonut0/CollisionShape3D" instance=ExtResource("4_81352")]
+base_temperature = 0.1
+base_capacity = 1.0
+base_conductivity = 0.1
+spacing = 0.6
+
+[node name="TempNode0" type="Node3D" parent="HeatDonut0/CollisionShape3D/TempCollection"]
+transform = Transform3D(1.1745793, 0, 0, 0, 1, 0, 0, 0, 0.82542074, -0.4952525, -1.9263197e-08, -0.4952525)
+script = ExtResource("5_81352")
+temperature = -100.0
+capacity = 10.0
+conductivity = 0.0
+
+[node name="TempNode1" type="Node3D" parent="HeatDonut0/CollisionShape3D/TempCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, -2.3841858e-08, -4.7683717e-08)
+script = ExtResource("5_81352")
+temperature = -100.0
+capacity = 10.0
+conductivity = 0.0
+
+[node name="TempNode2" type="Node3D" parent="HeatDonut0/CollisionShape3D/TempCollection"]
+transform = Transform3D(1.1745793, 0, 0, 0, 1, 0, 0, 0, 0.82542074, -0.4952525, -2.8420521e-08, 0.49525243)
+script = ExtResource("5_81352")
+temperature = -100.0
+capacity = 10.0
+conductivity = 0.0
+
+[node name="TempNode3" type="Node3D" parent="HeatDonut0/CollisionShape3D/TempCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683717e-08, -2.3841858e-08, -0.6)
+script = ExtResource("5_81352")
+temperature = -100.0
+capacity = 10.0
+conductivity = 0.0
+
+[node name="TempNode5" type="Node3D" parent="HeatDonut0/CollisionShape3D/TempCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7683717e-08, -2.384186e-08, 0.59999996)
+script = ExtResource("5_81352")
+temperature = -100.0
+capacity = 10.0
+conductivity = 0.0
+
+[node name="TempNode6" type="Node3D" parent="HeatDonut0/CollisionShape3D/TempCollection"]
+transform = Transform3D(1.1745793, 0, 0, 0, 1, 0, 0, 0, 0.82542074, 0.49525243, -1.9263197e-08, -0.4952525)
+script = ExtResource("5_81352")
+temperature = -100.0
+capacity = 10.0
+conductivity = 0.0
+
+[node name="TempNode7" type="Node3D" parent="HeatDonut0/CollisionShape3D/TempCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.59999996, -2.3841858e-08, -4.7683717e-08)
+script = ExtResource("5_81352")
+temperature = -100.0
+capacity = 10.0
+conductivity = 0.0
+
+[node name="TempNode8" type="Node3D" parent="HeatDonut0/CollisionShape3D/TempCollection"]
+transform = Transform3D(1.1745793, 0, 0, 0, 1, 0, 0, 0, 0.82542074, 0.49525243, -2.8420521e-08, 0.49525243)
+script = ExtResource("5_81352")
+temperature = -100.0
+capacity = 10.0
+conductivity = 0.0
+
+[node name="Ball0" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
+gravity_scale = 0.0
+
+[node name="Model" type="MeshInstance3D" parent="Ball0"]
+mesh = SubResource("SphereMesh_pyd17")
+
+[node name="TempShaderData" type="Node" parent="Ball0/Model" node_paths=PackedStringArray("temp_nodes")]
+script = ExtResource("2_81352")
+temp_nodes = [NodePath("../../CollisionShape3D/TemperatureCollection/TempNode0")]
+opacity = 0.95
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball0"]
+shape = SubResource("SphereShape3D_vax5a")
+
+[node name="TemperatureCollection" type="Node3D" parent="Ball0/CollisionShape3D"]
+script = ExtResource("6_wh0gb")
+base_temperature = 1.0
+base_capacity = 1.0
+metadata/_custom_type_script = "uid://c68mmqiwkqp5e"
+
+[node name="TempNode0" type="Node3D" parent="Ball0/CollisionShape3D/TemperatureCollection"]
+script = ExtResource("5_81352")
+temperature = 100.0
+capacity = 100.0
+
+[node name="Ball1" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -1)
+gravity_scale = 0.0
+
+[node name="Model" type="MeshInstance3D" parent="Ball1"]
+mesh = SubResource("SphereMesh_pyd17")
+
+[node name="TempShaderData" type="Node" parent="Ball1/Model" node_paths=PackedStringArray("temp_nodes")]
+script = ExtResource("2_81352")
+temp_nodes = [NodePath("../../CollisionShape3D/TemperatureCollection/TempNode0")]
+opacity = 0.95
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball1"]
+shape = SubResource("SphereShape3D_vax5a")
+
+[node name="TemperatureCollection" type="Node3D" parent="Ball1/CollisionShape3D"]
+script = ExtResource("6_wh0gb")
+base_temperature = 1.0
+base_capacity = 1.0
+metadata/_custom_type_script = "uid://c68mmqiwkqp5e"
+
+[node name="TempNode0" type="Node3D" parent="Ball1/CollisionShape3D/TemperatureCollection"]
+script = ExtResource("5_81352")
+temperature = -100.0
+capacity = 10.0
+conductivity = 0.0
+
+[node name="Box0" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+gravity_scale = 0.0
+
+[node name="Model" type="MeshInstance3D" parent="Box0"]
+mesh = SubResource("BoxMesh_wh0gb")
+
+[node name="TempShaderData" type="Node" parent="Box0/Model" node_paths=PackedStringArray("temp_nodes")]
+script = ExtResource("2_81352")
+temp_nodes = [NodePath("../../CollisionShape3D/TemperatureCollection/TempNode0"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode1"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode2"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode3"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode4"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode5"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode6"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode7"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode8"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode9"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode10"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode11"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode12"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode13"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode14"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode15"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode16"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode17"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode18"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode19"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode20")]
+temp_mult = 1.0
+temp_exponent = 1.0
+opacity = 0.2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box0"]
+shape = SubResource("BoxShape3D_pyd17")
+
+[node name="TemperatureCollection" type="Node3D" parent="Box0/CollisionShape3D"]
+script = ExtResource("6_wh0gb")
+base_temperature = -90.0
+base_conductivity = 0.2
+base_constant = true
+spacing = 2.0
+metadata/_custom_type_script = "uid://c68mmqiwkqp5e"
+
+[node name="TempNode0" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode1" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode2" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode3" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode4" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode5" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode6" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode7" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode8" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode9" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode10" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode11" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode12" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode13" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode14" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode15" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode16" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode17" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode18" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode19" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="TempNode20" type="Node3D" parent="Box0/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+constant = true
+
+[node name="Box1" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, -2)
+gravity_scale = 0.0
+
+[node name="Model" type="MeshInstance3D" parent="Box1"]
+mesh = SubResource("BoxMesh_wh0gb")
+
+[node name="TempShaderData" type="Node" parent="Box1/Model" node_paths=PackedStringArray("temp_nodes")]
+script = ExtResource("2_81352")
+temp_nodes = [NodePath("../../CollisionShape3D/TemperatureCollection/TempNode0"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode1"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode2"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode3"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode4"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode5"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode6"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode7"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode8"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode9"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode10"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode11"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode12"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode13"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode14"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode15"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode16"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode17"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode18"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode19"), NodePath("../../CollisionShape3D/TemperatureCollection/TempNode20")]
+temp_mult = 1.0
+temp_exponent = 1.0
+opacity = 0.2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Box1"]
+shape = SubResource("BoxShape3D_pyd17")
+
+[node name="TemperatureCollection" type="Node3D" parent="Box1/CollisionShape3D"]
+script = ExtResource("6_wh0gb")
+base_temperature = -90.0
+base_conductivity = 0.2
+base_constant = true
+spacing = 2.0
+metadata/_custom_type_script = "uid://c68mmqiwkqp5e"
+
+[node name="TempNode0" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, -2, 0)
+script = ExtResource("5_81352")
+temperature = 90.0
+capacity = 10.0
+conductivity = 0.2
+
+[node name="TempNode1" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode2" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode3" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, -2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode4" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode5" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode6" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode7" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode8" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode9" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+script = ExtResource("5_81352")
+temperature = 90.0
+capacity = 10.0
+conductivity = 0.2
+
+[node name="TempNode10" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode11" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode12" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode13" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode14" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode15" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode16" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode17" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode18" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, -2, 0)
+script = ExtResource("5_81352")
+temperature = 90.0
+capacity = 10.0
+conductivity = 0.2
+
+[node name="TempNode19" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="TempNode20" type="Node3D" parent="Box1/CollisionShape3D/TemperatureCollection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 0)
+script = ExtResource("5_81352")
+temperature = -90.0
+conductivity = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+environment = SubResource("Environment_oktae")
+fov = 90.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8642433, -0.1327706, 0.4852376, -0.03803766, 0.944538, 0.32619214, -0.50163406, -0.30036664, 0.8112602, 0.9270433, 0.822261, 1.6553679)
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4n1no")
+
+[node name="TemperatureManager" type="Node" parent="."]
+script = ExtResource("6_1gmwy")
+chunk_size = 3.0

@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bjv6yusfn7u6e"]
+
+[ext_resource type="Shader" uid="uid://bie05tu1gghiw" path="res://shaders/temp.shader.gdshader" id="1_abucc"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_abucc")
+shader_parameter/temp_positions = PackedVector3Array(-1, -1, 0, -1, 1, 0, 1, 1, 0, 1, -1, 0)
+shader_parameter/temp_values = PackedFloat32Array(1, 1, 1, 1)
+shader_parameter/temp_count = 4
+shader_parameter/temp_mult = 0.5
+shader_parameter/temp_exponent = 2.0
+shader_parameter/opacity = 1.0
+shader_parameter/light_exponent = 2.0

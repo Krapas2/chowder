@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyxs3oq2h76ay"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6m1ak"]
+radius = 0.45
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6m1ak"]
+
+[node name="Player" type="RigidBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+current = true
+fov = 90.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_6m1ak")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_6m1ak")

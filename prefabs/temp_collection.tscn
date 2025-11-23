@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpdtmrois8y6r"]
+
+[ext_resource type="Script" uid="uid://c68mmqiwkqp5e" path="res://scripts/temperature/temp-collection.gd" id="1_ekn3k"]
+
+[node name="TempCollection" type="Node3D"]
+script = ExtResource("1_ekn3k")
+spacing = 0.5

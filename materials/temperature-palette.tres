@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bxov54cym1qro"]
+
+[ext_resource type="Shader" uid="uid://bandpvjis47vj" path="res://shaders/linear-palette-swap.shader.gdshader" id="1_nufxo"]
+[ext_resource type="Texture2D" uid="uid://el01onluf4fl" path="res://sprites/palettes/thermal-rainbow.palette.png" id="2_nufxo"]
+
+[resource]
+shader = ExtResource("1_nufxo")
+shader_parameter/exponent = 1.0
+shader_parameter/palette = ExtResource("2_nufxo")
