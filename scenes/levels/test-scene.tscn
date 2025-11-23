@@ -1,6 +1,5 @@
-[gd_scene load_steps=16 format=3 uid="uid://cqa6oxoablu5b"]
+[gd_scene load_steps=15 format=3 uid="uid://cqa6oxoablu5b"]
 
-[ext_resource type="Script" uid="uid://ka71n46wrovr" path="res://scripts/spin.gd" id="2_1gmwy"]
 [ext_resource type="Script" uid="uid://x3b2c1hyotyg" path="res://scripts/temperature/temp-shader-data.gd" id="2_81352"]
 [ext_resource type="Material" uid="uid://bxov54cym1qro" path="res://materials/temperature-palette.tres" id="2_q7s53"]
 [ext_resource type="PackedScene" uid="uid://bpdtmrois8y6r" path="res://prefabs/temp_collection.tscn" id="4_81352"]
@@ -50,8 +49,6 @@ mouse_filter = 2
 [node name="HeatDonut0" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, -1)
 gravity_scale = 0.0
-script = ExtResource("2_1gmwy")
-rotation_amount = Vector3(0, 0, 0)
 
 [node name="Model" type="MeshInstance3D" parent="HeatDonut0"]
 mesh = SubResource("TorusMesh_81352")
